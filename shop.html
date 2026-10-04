@@ -1,0 +1,53 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Shop | Kitchen by Kian</title>
+<meta name="description" content="Order premium homemade Chicken Cheese Rolls in Lahore: fresh or frozen packs.">
+<meta name="theme-color" content="#141110">
+<link rel="icon" type="image/png" href="favicon.png">
+<link rel="apple-touch-icon" href="favicon.png">
+<meta property="og:title" content="Shop | Kitchen by Kian">
+<meta property="og:description" content="Order premium homemade Chicken Cheese Rolls in Lahore: fresh or frozen packs.">
+<meta property="og:image" content="https://kitchenbykian.com/share.jpg">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600&family=Great+Vibes&family=Playfair+Display:wght@500;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css">
+</head>
+<body data-page="shop">
+<div id="site-header"></div>
+<header class="page-hero">
+  <div class="wrap">
+    <div class="eyebrow">The Shop</div>
+    <h1>Homemade, Ready to Order</h1>
+    <p>Choose your pack, add it to your cart, and check out in under a minute.<span data-fill="launch"> We're launching soon, so reserve now for launch day!</span></p>
+    <div class="crumbs"><a href="index.html">Home</a> / Shop</div>
+  </div>
+</header>
+<section style="padding-top:30px">
+  <div class="wrap">
+    <div class="shop-grid" id="shopGrid"></div>
+    <div class="center reveal soon-title"><div class="eyebrow">Coming Soon</div><h2>More From Our Kitchen</h2><p class="sub">Tap "Notify me" and we'll message you on WhatsApp the day they launch.</p></div>
+    <div class="shop-grid four" id="soonGrid"></div>
+  </div>
+</section>
+<section class="alt">
+  <div class="wrap">
+    <div class="center reveal"><div class="eyebrow">Good to Know</div><h2>Delivery &amp; Payment</h2></div>
+    <div class="info">
+      <div class="card tilt reveal"><div class="shine"></div><div class="lift"><b>Areas</b><div data-fill="areas"></div></div></div>
+      <div class="card tilt reveal d1"><div class="shine"></div><div class="lift"><b>Delivery Charges</b><div data-fill="fee"></div></div></div>
+      <div class="card tilt reveal d2"><div class="shine"></div><div class="lift"><b>Order Timing</b><div data-fill="timing"></div></div></div>
+    </div>
+    <p class="center sub reveal" style="margin-top:1.4rem">Payment: <span data-fill="payment"></span></p>
+  </div>
+</section>
+<div id="site-footer"></div>
+<script src="config.js"></script>
+<script src="app.js"></script>
+<script>renderProducts(document.getElementById('shopGrid'),{status:'available'}); renderProducts(document.getElementById('soonGrid'),{status:'soon'});</script>
+</body>
+</html>

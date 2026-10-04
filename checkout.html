@@ -1,0 +1,59 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Checkout | Kitchen by Kian</title>
+<meta name="description" content="Complete your Kitchen by Kian order.">
+<meta name="theme-color" content="#141110">
+<link rel="icon" type="image/png" href="favicon.png">
+<link rel="apple-touch-icon" href="favicon.png">
+<meta property="og:title" content="Checkout | Kitchen by Kian">
+<meta property="og:description" content="Complete your Kitchen by Kian order.">
+<meta property="og:image" content="https://kitchenbykian.com/share.jpg">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600&family=Great+Vibes&family=Playfair+Display:wght@500;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css">
+</head>
+<body data-page="checkout">
+<div id="site-header"></div>
+<header class="page-hero" style="padding-bottom:30px">
+  <div class="wrap">
+    <div class="eyebrow">Checkout</div>
+    <h1 id="coTitle">Complete Your Order</h1>
+    <div class="crumbs"><a href="index.html">Home</a> / <a href="shop.html">Shop</a> / Checkout</div>
+  </div>
+</header>
+<section style="padding-top:20px">
+  <div class="wrap" id="coWrap">
+    <div class="two">
+      <form class="panel" id="checkoutForm" novalidate>
+        <h3>Your Details</h3>
+        <div class="row2">
+          <div class="field" data-req><label for="n">Full name *</label><input id="n" name="name" autocomplete="name"><span class="err">Please enter your name</span></div>
+          <div class="field" data-req><label for="ph">Phone (WhatsApp) *</label><input id="ph" name="phone" inputmode="tel" autocomplete="tel" placeholder="03XX XXXXXXX"><span class="err">Please enter a valid mobile number</span></div>
+        </div>
+        <div class="field" data-req><label for="ar">Area / Town *</label><input id="ar" name="area" placeholder="e.g. DHA Phase 5, Johar Town, Model Town"><span class="err">Please enter your area</span></div>
+        <div class="field" data-req><label for="ad">Full address *</label><textarea id="ad" name="address" placeholder="House no., street, nearby landmark"></textarea><span class="err">Please enter your address</span></div>
+        <div class="field"><label for="wh">Preferred delivery day &amp; time</label><input id="wh" name="when" placeholder="e.g. Saturday evening"></div>
+        <h3 style="margin-top:1.2rem">Payment Method</h3>
+        <div class="radios" id="payBox"></div>
+        <div class="field" style="margin-top:14px"><label for="nt">Order notes</label><textarea id="nt" name="notes" placeholder="Anything we should know?"></textarea></div>
+        <button class="btn" id="placeBtn" type="submit" style="width:100%;justify-content:center;margin-top:6px"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2Z"/></svg><span>Place Order on WhatsApp</span></button>
+        <p class="note" id="coNote">Your order opens in WhatsApp, ready to send. We'll confirm the total and delivery time with you before preparing it.</p>
+      </form>
+      <div class="panel sticky">
+        <h3>Order Summary</h3>
+        <div id="orderSummary"></div>
+      </div>
+    </div>
+  </div>
+</section>
+<div id="site-footer"></div>
+<script src="config.js"></script>
+<script src="app.js"></script>
+<script>initCheckout();</script>
+</body>
+</html>
