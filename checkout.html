@@ -6,6 +6,11 @@
 <title>Checkout | Kitchen by Kian</title>
 <meta name="description" content="Complete your Kitchen by Kian order.">
 <meta name="theme-color" content="#141110">
+<link rel="canonical" href="https://kitchenbykian.com/checkout.html">
+<meta property="og:url" content="https://kitchenbykian.com/checkout.html">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Kitchen by Kian">
+<meta name="robots" content="noindex">
 <link rel="icon" type="image/png" href="favicon.png">
 <link rel="apple-touch-icon" href="favicon.png">
 <meta property="og:title" content="Checkout | Kitchen by Kian">
@@ -30,14 +35,19 @@
   <div class="wrap" id="coWrap">
     <div class="two">
       <form class="panel" id="checkoutForm" novalidate>
-        <h3>Your Details</h3>
+        <h3>Delivery or Pickup</h3>
+        <div class="radios method" id="methodBox"></div>
+        <div class="pickup-info" id="pickupInfo" hidden></div>
+        <h3 style="margin-top:1.2rem">Your Details</h3>
         <div class="row2">
           <div class="field" data-req><label for="n">Full name *</label><input id="n" name="name" autocomplete="name"><span class="err">Please enter your name</span></div>
           <div class="field" data-req><label for="ph">Phone (WhatsApp) *</label><input id="ph" name="phone" inputmode="tel" autocomplete="tel" placeholder="03XX XXXXXXX"><span class="err">Please enter a valid mobile number</span></div>
         </div>
+        <div id="deliveryFields">
         <div class="field" data-req><label for="ar">Area / Town *</label><input id="ar" name="area" placeholder="e.g. DHA Phase 5, Johar Town, Model Town"><span class="err">Please enter your area</span></div>
         <div class="field" data-req><label for="ad">Full address *</label><textarea id="ad" name="address" placeholder="House no., street, nearby landmark"></textarea><span class="err">Please enter your address</span></div>
-        <div class="field"><label for="wh">Preferred delivery day &amp; time</label><input id="wh" name="when" placeholder="e.g. Saturday evening"></div>
+        </div>
+        <div class="field"><label for="wh" id="whLabel">Preferred delivery day &amp; time</label><input id="wh" name="when" placeholder="e.g. Saturday evening"></div>
         <h3 style="margin-top:1.2rem">Payment Method</h3>
         <div class="radios" id="payBox"></div>
         <div class="field" style="margin-top:14px"><label for="nt">Order notes</label><textarea id="nt" name="notes" placeholder="Anything we should know?"></textarea></div>

@@ -391,3 +391,12 @@ body.simple .float{animation:none}
 .social-center{justify-content:center}
 .social-center a{width:46px;height:46px}
 .foot-bottom{justify-content:center;text-align:center}
+
+/* ---- Checkout: Delivery / Pickup ---- */
+.radios.method{grid-template-columns:1fr 1fr}
+.radios.method label{flex-direction:column;align-items:flex-start;gap:2px}
+.radios.method label b{font-weight:600;display:flex;gap:8px;align-items:center}
+.radios.method label small{color:var(--muted);font-size:.8rem;padding-left:24px}
+@media(max-width:420px){.radios.method{grid-template-columns:1fr}}
+.pickup-info{margin-top:12px;border:1px dashed var(--gold);border-radius:12px;padding:.85rem 1rem;color:var(--cream);font-size:.9rem;line-height:1.6;background:rgba(201,162,74,.05)}
+.pickup-info span{color:var(--muted);display:block;font-size:.82rem}

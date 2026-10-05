@@ -61,11 +61,11 @@
   };
   window.KBK = { Cart, rs, wa, pic, product, PRE, money, priceOf, minPrice };
 
-  function totals() {
+  function totals(pickup) {
     const sub = Cart.subtotal(), d = C.delivery;
-    const free = d.freeAbove && sub >= d.freeAbove;
-    const fee = d.fee && !free ? d.fee : 0;
-    return { sub, fee, free, total: sub + fee, priced: Cart.priced() && Cart.count() > 0 };
+    const free = !pickup && d.freeAbove && sub >= d.freeAbove;
+    const fee = !pickup && d.fee && !free ? d.fee : 0;
+    return { sub, fee, free, pickup: !!pickup, total: sub + fee, priced: Cart.priced() && Cart.count() > 0 };
   }
 
   /* ---------- header / banner / footer / drawer ---------- */
@@ -145,7 +145,7 @@
     const t = totals();
     ft.innerHTML = `<div class="sum"><span>Subtotal</span><b>${t.priced ? money(t.sub) : rs(0)}</b></div>
       <a class="btn" href="checkout.html">${PRE ? "Reserve for Launch Day" : "Proceed to Checkout"}</a>
-      <p class="note" style="text-align:center">Delivery is confirmed on WhatsApp.</p>`;
+      <p class="note" style="text-align:center">${C.pickup && C.pickup.enabled ? "Delivery or pickup" : "Delivery"} is confirmed on WhatsApp.</p>`;
     box.querySelectorAll("[data-d]").forEach(b => b.onclick = () => { const it = Cart.items().find(i => i.key === b.dataset.k); Cart.set(b.dataset.k, it.qty + +b.dataset.d); renderDrawer(); });
     box.querySelectorAll("[data-rm]").forEach(b => b.onclick = () => { Cart.remove(b.dataset.rm); renderDrawer(); });
   }
@@ -194,42 +194,82 @@
   /* ---------- checkout ---------- */
   window.initCheckout = function () {
     const sumBox = $("#orderSummary"), form = $("#checkoutForm");
-    const paySel = $("#payBox");
-    paySel.innerHTML = C.delivery.payment.map((p, i) => `<label><input type="radio" name="pay" value="${esc(p)}" ${i ? "" : "checked"}> ${esc(p)}</label>`).join("");
-    if (PRE) { $("#coTitle").textContent = "Reserve for Launch Day"; $("#placeBtn span").textContent = "Send Reservation on WhatsApp"; $("#coNote").textContent = "No payment now. We'll confirm your reservation, price and delivery on WhatsApp before launch day."; }
+    const paySel = $("#payBox"), PK = C.pickup || {}, canPickup = !!PK.enabled;
+    const methodBox = $("#methodBox"), pkInfo = $("#pickupInfo"), delFields = $("#deliveryFields");
+    const isPickup = () => canPickup && (form.querySelector('input[name="method"]:checked') || {}).value === "pickup";
+    // Delivery / Pickup choice (hidden completely if pickup is switched off in config.js)
+    if (canPickup && methodBox) {
+      methodBox.innerHTML = `<label><b><input type="radio" name="method" value="delivery" checked> Delivery</b><small>${esc(C.delivery.areas)}</small></label>
+        <label><b><input type="radio" name="method" value="pickup"> Pickup</b><small>From ${esc(PK.area)}</small></label>`;
+      pkInfo.innerHTML = `<b>Pickup from ${esc(PK.area)}</b><br>Hours: ${esc(PK.hours)} · ${esc(C.delivery.timing)}${PK.note ? `<span>${esc(PK.note)}</span>` : ""}`;
+    } else if (methodBox) { methodBox.previousElementSibling.remove(); methodBox.remove(); pkInfo && pkInfo.remove(); }
+    function drawPay() {
+      const cur = (form.querySelector('input[name="pay"]:checked') || {}).value;
+      const pk = isPickup();
+      paySel.innerHTML = C.delivery.payment.map((p, i) => {
+        const label = pk ? p.replace(/on Delivery/i, "on Pickup") : p;
+        const checked = cur ? (cur === p || cur === p.replace(/on Delivery/i, "on Pickup")) : !i;
+        return `<label><input type="radio" name="pay" value="${esc(label)}" ${checked ? "checked" : ""}> ${esc(label)}</label>`;
+      }).join("");
+    }
+    function setNote() {
+      const pk = isPickup();
+      $("#coNote").textContent = PRE
+        ? `No payment now. We'll confirm your reservation, price and ${pk ? "pickup time" : "delivery"} on WhatsApp before launch day.`
+        : (pk ? "Your order opens in WhatsApp, ready to send. We'll confirm the total, pickup time and address with you before preparing it."
+              : "Your order opens in WhatsApp, ready to send. We'll confirm the total and delivery time with you before preparing it.");
+    }
+    function applyMethod() {
+      const pk = isPickup();
+      if (delFields) { delFields.hidden = pk; delFields.querySelectorAll(".field").forEach(f => f.classList.remove("bad")); }
+      if (pkInfo) pkInfo.hidden = !pk;
+      if ($("#whLabel")) $("#whLabel").textContent = pk ? "Preferred pickup day & time" : "Preferred delivery day & time";
+      if ($("#wh")) $("#wh").placeholder = pk ? `e.g. Saturday 6 PM (${PK.hours || ""})` : "e.g. Saturday evening";
+      drawPay(); setNote(); draw();
+    }
+    if (PRE) { $("#coTitle").textContent = "Reserve for Launch Day"; $("#placeBtn span").textContent = "Send Reservation on WhatsApp"; }
     function draw() {
       const items = Cart.items();
       if (!items.length) { sumBox.innerHTML = `<div class="empty"><p>Your cart is empty.</p><a class="btn sm" href="shop.html">Go to Shop</a></div>`; $("#placeBtn").disabled = true; return; }
       $("#placeBtn").disabled = false;
-      const t = totals();
+      const t = totals(isPickup());
       sumBox.innerHTML = `<div class="osum">${items.map(i => itemRow(i, true)).join("")}</div>
         <div class="line"><span>Subtotal</span><span>${t.priced ? money(t.sub) : rs(0)}</span></div>
-        <div class="line"><span>Delivery</span><span>${t.free ? "Free" : (C.delivery.fee ? money(C.delivery.fee) : "Confirmed on WhatsApp")}</span></div>
-        <div class="line tot"><span>Total${C.delivery.fee || t.free ? "" : " (+ delivery)"}</span><b>${t.priced ? money(t.total) : rs(0)}</b></div>
+        ${t.pickup ? `<div class="line"><span>Pickup</span><span>Free · ${esc(PK.area)}</span></div>`
+          : `<div class="line"><span>Delivery</span><span>${t.free ? "Free" : (C.delivery.fee ? money(C.delivery.fee) : "Confirmed on WhatsApp")}</span></div>`}
+        <div class="line tot"><span>Total${t.pickup || C.delivery.fee || t.free ? "" : " (+ delivery)"}</span><b>${t.priced ? money(t.total) : rs(0)}</b></div>
         <a href="shop.html" class="note" style="display:inline-block;color:var(--gold)">← Edit cart</a>`;
     }
-    window.onCartChange = draw; draw();
+    window.onCartChange = draw;
+    form.addEventListener("change", e => { if (e.target.name === "method") applyMethod(); });
+    applyMethod();
     form.addEventListener("input", e => { const f = e.target.closest(".field"); if (f) f.classList.remove("bad"); });
     form.onsubmit = e => {
       e.preventDefault();
       let ok = true;
+      const pk = isPickup();
       $$(".field[data-req]", form).forEach(f => {
+        if (pk && f.closest("#deliveryFields")) { f.classList.remove("bad"); return; } // no address needed for pickup
         const inp = f.querySelector("input,select,textarea"); let v = inp.value.trim();
         let bad = !v; if (inp.name === "phone") bad = !/^(\+?92|0)?3\d{9}$/.test(v.replace(/[\s-]/g, ""));
         f.classList.toggle("bad", bad); if (bad) ok = false;
       });
       if (!ok) { $(".field.bad input,.field.bad select", form)?.focus(); return; }
-      const d = Object.fromEntries(new FormData(form)); const t = totals(); const items = Cart.items();
+      const d = Object.fromEntries(new FormData(form)); const t = totals(pk); const items = Cart.items();
       const msg = [
         PRE ? "Assalam o Alaikum! I'd like to RESERVE an order for Kitchen by Kian's launch day:" : "Assalam o Alaikum! New order from kitchenbykian.com:",
         "",
+        pk ? `*PICKUP* (I'll collect from ${PK.area})` : "*DELIVERY*",
+        "",
         ...items.map(i => `• ${i.qty} × ${i.name}${(product(i.id)||{}).subtitle ? " – " + product(i.id).subtitle : ""} (${i.pack}, ${i.type})${i.price ? " = " + money(i.price * i.qty) : ""}`),
         "",
-        t.priced ? `Subtotal: ${money(t.sub)}` : null, t.priced ? `Delivery: ${t.free ? "Free" : (C.delivery.fee ? money(C.delivery.fee) : "to confirm")}` : null,
-        t.priced ? `TOTAL: ${money(t.total)}${C.delivery.fee || t.free ? "" : " + delivery"}` : null,
+        t.priced ? `Subtotal: ${money(t.sub)}` : null,
+        t.priced ? (pk ? "Pickup: Free" : `Delivery: ${t.free ? "Free" : (C.delivery.fee ? money(C.delivery.fee) : "to confirm")}`) : null,
+        t.priced ? `TOTAL: ${money(t.total)}${pk || C.delivery.fee || t.free ? "" : " + delivery"}` : null,
         t.priced ? "" : null,
-        `Name: ${d.name}`, `Phone: ${d.phone}`, `Area: ${d.area}`, `Address: ${d.address}`,
-        d.when ? `Preferred delivery: ${d.when}` : null, `Payment: ${d.pay}`, d.notes ? `Notes: ${d.notes}` : null
+        `Name: ${d.name}`, `Phone: ${d.phone}`,
+        ...(pk ? [`Order type: PICKUP`] : [`Area: ${d.area}`, `Address: ${d.address}`]),
+        d.when ? `Preferred ${pk ? "pickup" : "delivery"}: ${d.when}` : null, `Payment: ${d.pay}`, d.notes ? `Notes: ${d.notes}` : null
       ].filter(l => l !== null).join("\n");
       try { window.open(wa(msg), "_blank", "noopener"); } catch (e) {}
       Cart.clear();

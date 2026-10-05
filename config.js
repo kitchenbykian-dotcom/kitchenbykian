@@ -60,6 +60,14 @@ window.CONFIG = {
     payment: [ "Cash on Delivery", "JazzCash", "Easypaisa", "Bank Transfer" ]
   },
 
+  // Customers can collect their order from home instead of delivery
+  pickup: {
+    enabled: true,               // false = hide the Pickup option at checkout
+    area:    "Islampura, Lahore",
+    hours:   "11 AM – 10 PM",
+    note:    "Exact pickup address shared on WhatsApp when we confirm your order"
+  },
+
   social: {
     instagram: "https://www.instagram.com/kitchenbykian/",
     facebook:  "https://www.facebook.com/profile.php?id=61595196895998",
