@@ -316,9 +316,6 @@
     const box = $("#heroMedia");
     const cap = C.heroCaption ? `<span class="pic-note">${esc(C.heroCaption)}</span>` : "";
     if (C.heroVideo) { box.insertAdjacentHTML("afterbegin", `<video src="${esc(C.heroVideo)}" ${C.heroImage ? `poster="${esc(C.heroImage)}"` : ""} autoplay muted loop playsinline></video>${cap}`); stage.classList.add("has-media"); }
-    else if (C.heroLayers && C.heroLayers.bg) { const L = C.heroLayers;
-      box.insertAdjacentHTML("afterbegin", `<div class="h3d"><img class="h3d-bg" src="${esc(L.bg)}" alt="" fetchpriority="high"><img class="h3d-fg" src="${esc(L.fg)}" alt="${esc(L.alt || "Kitchen by Kian Cheese Chaska Roll")}" style="left:${L.left}%;top:${L.top}%;width:${L.width}%"><i class="h3d-glint"></i></div>${cap}`);
-      stage.classList.add("has-media", "has-3d"); }
     else if (C.heroImage) { box.insertAdjacentHTML("afterbegin", `<img src="${esc(C.heroImage)}" alt="Kitchen by Kian Cheese Chaska Roll">${cap}`); stage.classList.add("has-media"); }
     if (PRE) { $$(".cta-long").forEach(e => e.textContent = "Join the Launch List"); }
   }

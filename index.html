@@ -20,7 +20,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600&family=Great+Vibes&family=Playfair+Display:wght@500;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="styles.css?v=20261008b">
+<link rel="stylesheet" href="styles.css?v=20261008c">
 </head>
 <body data-page="home">
 <div id="site-header"></div>
@@ -114,92 +114,6 @@
   </div>
 </header>
 
-<!-- =================== SCROLL STORY (8 Oct 2026) =================== -->
-<!-- Scene 1: real video, plays as you scroll (frames in photos/story) -->
-<section class="ss-scene ss-s1" id="ss1" aria-label="Our roll, turning as you scroll">
-  <div class="ss-sticky">
-    <div class="ss-wrap1">
-      <div class="ss-lines">
-        <div class="eyebrow">Made in Our Kitchen</div>
-        <div class="ss-heads">
-          <h2 data-r="0,.34">Hand-wrapped <em>at home.</em></h2>
-          <h2 data-r=".34,.67">Crumb-coated, <em>one by one.</em></h2>
-          <h2 data-r=".67,1.01">Delivered frozen, <em>ready to cook.</em></h2>
-        </div>
-        <p class="ss-hint">Scroll to turn the roll</p>
-      </div>
-      <div class="ss-vframe">
-        <canvas id="ssCanvas" width="540" height="960" aria-label="A Cheese Chaska Roll turning in a gloved hand"></canvas>
-        <noscript><img src="photos/story/f030.webp" alt="A Cheese Chaska Roll in a gloved hand"></noscript>
-        <span class="ss-tag">Real video · our kitchen</span>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- Scene 2: inside the roll (illustration) -->
-<section class="ss-scene ss-s2" id="ss2" aria-label="Inside the roll">
-  <div class="ss-sticky">
-    <div class="ss-wrap2">
-      <div class="ss-side">
-        <div class="eyebrow">Inside the Roll</div>
-        <h2 class="ss-t">Every layer, made by hand.</h2>
-        <ul class="ss-layers" id="ssLayers">
-          <li><b>Golden crust</b><span>Crumb-coated by hand, fries golden-crisp</span></li>
-          <li><b>Melted cheese centre</b><span>A generous pull in every bite</span></li>
-          <li><b>Spiced chicken</b><span>Tender chicken with shimla mirch and our spices</span></li>
-          <li><b>Hand-wrapped &amp; sealed</b><span>Small batches from our family kitchen</span></li>
-        </ul>
-      </div>
-      <div class="ss-stage">
-        <svg viewBox="0 0 600 400" aria-label="Illustration of the roll's layers separating">
-          <defs>
-            <linearGradient id="ssTop" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#f0c069"/><stop offset="1" stop-color="#b8752a"/></linearGradient>
-            <linearGradient id="ssBot" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#c98a3a"/><stop offset="1" stop-color="#6e4219"/></linearGradient>
-            <linearGradient id="ssChz" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#ffe9a0"/><stop offset="1" stop-color="#efb93c"/></linearGradient>
-          </defs>
-          <ellipse id="ssSh" cx="300" cy="350" rx="200" ry="16" fill="#000" opacity=".5"/>
-          <g id="ssLbot"><path d="M110 250h380c0 30-30 52-70 52H180c-40 0-70-22-70-52Z" fill="url(#ssBot)"/><path d="M130 262h340" stroke="#e6b263" stroke-opacity=".4" stroke-width="3"/></g>
-          <g id="ssLchk">
-            <path d="M118 218h364v32H118Z" fill="#7d4c22"/>
-            <g fill="#a2662e"><circle cx="150" cy="232" r="11"/><circle cx="200" cy="228" r="13"/><circle cx="252" cy="236" r="10"/><circle cx="300" cy="229" r="12"/><circle cx="352" cy="235" r="11"/><circle cx="402" cy="229" r="13"/><circle cx="450" cy="234" r="10"/></g>
-            <g fill="#6f9b3a"><rect x="174" y="236" width="10" height="6" rx="2"/><rect x="276" y="222" width="9" height="6" rx="2"/><rect x="380" y="238" width="10" height="6" rx="2"/><rect x="430" y="222" width="8" height="5" rx="2"/></g>
-          </g>
-          <g id="ssLchs"><path d="M114 196h372v24c-14 0-14 10-28 10s-14-10-28-10-14 14-28 14-14-14-28-14-14 8-28 8-14-8-28-8-14 16-28 16-14-16-28-16-14 8-28 8-14-8-28-8-14 12-28 12-14-12-28-12-14 6-14 6Z" fill="url(#ssChz)"/></g>
-          <g id="ssLtop"><path d="M110 198c0-60 60-92 190-92s190 32 190 92Z" fill="url(#ssTop)"/>
-            <g fill="#8b5420" opacity=".5"><circle cx="190" cy="150" r="3"/><circle cx="250" cy="130" r="2.5"/><circle cx="330" cy="128" r="3"/><circle cx="400" cy="150" r="2.5"/><circle cx="300" cy="165" r="2"/><circle cx="440" cy="175" r="2"/></g>
-            <path d="M170 140c60-22 200-22 260 0" stroke="#fff3c8" stroke-opacity=".35" stroke-width="5" fill="none" stroke-linecap="round"/></g>
-        </svg>
-        <span class="ss-tag ss-tag-top">Illustration · inside a cooked roll</span>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- Scene 3: real photos, prices, WhatsApp and socials -->
-<section class="ss-scene ss-s3" id="ss3" aria-label="Packs and prices">
-  <div class="ss-sticky">
-    <div class="ss-wrap3">
-      <div class="ss-photos">
-        <img data-r="0,.34" src="photos/story-side.jpg" alt="Six Cheese Chaska Rolls on a black and gold plate" loading="lazy">
-        <img data-r=".34,.67" src="photos/story-plate-6.jpg" alt="Pack of 6 Cheese Chaska Rolls on a plate" loading="lazy">
-        <img data-r=".67,1.01" src="photos/story-plate-12.jpg" alt="Pack of 12 Cheese Chaska Rolls on a plate" loading="lazy">
-        <span class="ss-tag">Our rolls · delivered frozen, ready to cook</span>
-      </div>
-      <div class="ss-copy">
-        <div class="ss-step" data-r="0,.34"><div class="eyebrow">Straight to Your Freezer</div><h2>Made by hand, frozen fresh.</h2><p>Every roll is wrapped and crumb-coated by hand in our family kitchen, then frozen and sealed. Delivered frozen, ready to cook.</p></div>
-        <div class="ss-step" data-r=".34,.67"><div class="eyebrow">Ready in Minutes</div><h2>Fry from frozen, 5–7 minutes.</h2><p>Medium heat, straight from the freezer to golden-crisp. Keeps up to 1 month frozen when sealed.</p></div>
-        <div class="ss-step" data-r=".67,1.01"><div class="eyebrow">Order Now</div><h2>Cheese Chaska Roll</h2>
-          <div class="ss-packs" id="ssPacks"></div>
-          <div class="ss-ctas"><a class="btn" href="shop.html">Order Online</a><a class="btn ghost wa-link" href="#">Order on WhatsApp</a></div>
-          <div class="ss-follow"><span>Follow us</span><div id="ssSocial"></div></div>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-<!-- =================== /SCROLL STORY =================== -->
-
 <section id="menu">
   <div class="wrap">
     <div class="center reveal">
@@ -286,9 +200,8 @@
   </div>
 </section>
 <div id="site-footer"></div>
-<script src="config.js?v=20261008b"></script>
-<script src="app.js?v=20261008b"></script>
-<script src="story.js?v=20261008b" defer></script>
+<script src="config.js?v=20261008c"></script>
+<script src="app.js?v=20261008c"></script>
 <script>
 const {pic, PRE, rs} = KBK;
 document.getElementById('menuGrid').innerHTML = CONFIG.products.map((m,i)=>{

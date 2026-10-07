@@ -20,12 +20,9 @@ window.CONFIG = {
   theme: "noir",
   // Real hero media (put the file in the "photos" folder): video shown first, then photo
   heroVideo: "",
-  heroImage: "",                 // single photo, e.g. "photos/hero.jpg" (used if heroLayers is empty)
-  // 3D hero: background photo + the rolls as a separate floating layer (moves with mouse / scroll)
-  heroLayers: { bg: "photos/hero-bg.jpg", fg: "photos/hero-rolls.webp", left: 5.6, top: 32.1, width: 88.8,
-                alt: "Six Cheese Chaska Rolls on a black and gold plate" },
+  heroImage: "",                 // e.g. "photos/hero.jpg"
   // Shown on the hero photo. Use it whenever the hero shows cooked rolls.
-  heroCaption: "",              // e.g. "Serving suggestion — delivered frozen" if the hero shows cooked rolls
+  heroCaption: "Serving suggestion — delivered frozen",
 
   /* ---------------- PRODUCTS ----------------
      status: "available" or "soon" ("soon" = shown as Coming Soon, cannot be ordered)
@@ -42,9 +39,9 @@ window.CONFIG = {
       desc: "Our signature: tender spiced chicken and a generous melted-cheese centre, hand-wrapped at home and delivered frozen. Cook straight from the freezer whenever you like.",
       status: "available",
       badge: "Signature",
-      art: "roll", image: "photos/cheese-chaska-roll-product.jpg", imageNote: "",
+      art: "roll", image: "", imageNote: "",
       packs: [
-        // image: photo shown on the shop card when this pack is selected
+        // image: photo shown on the Shop card when this pack is selected
         { name: "Pack of 6",  price: 1500, image: "photos/pack-6.jpg" },
         { name: "Pack of 12", price: 3000, image: "photos/pack-12.jpg" }
       ],
