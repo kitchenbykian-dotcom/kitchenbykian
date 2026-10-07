@@ -18,7 +18,7 @@
   const wa = msg => `https://wa.me/${C.whatsapp}?text=${encodeURIComponent(msg)}`;
   const general = PRE
     ? "Assalam o Alaikum! Please add me to the Kitchen by Kian launch list. I'd like the opening-day offer."
-    : "Assalam o Alaikum! I'd like to place an order with Kitchen by Kian.";
+    : "Assalam o Alaikum! I'd like to order Frozen Cheese Chaska Rolls from Kitchen by Kian.";
   const WA_ICON = '<svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2Zm4.5 12.1c-.2-.1-1.5-.7-1.7-.8s-.4-.1-.6.1-.7.8-.8 1-.3.2-.5.1a6.7 6.7 0 0 1-3.3-2.9c-.3-.4.3-.4.7-1.4.1-.2 0-.3 0-.4l-.8-1.8c-.2-.5-.4-.4-.6-.4h-.5a1 1 0 0 0-.7.3 3 3 0 0 0-.9 2.2 5.2 5.2 0 0 0 1.1 2.7 11.8 11.8 0 0 0 4.5 4c1.7.7 2.4.8 3.2.6a2.8 2.8 0 0 0 1.8-1.3 2.3 2.3 0 0 0 .2-1.3c-.1-.1-.3-.2-.5-.3Z"/></svg>';
 
   /* ---------- product icons (replaced automatically when you add photos) ---------- */
@@ -30,22 +30,28 @@
     samosa: `<svg viewBox="0 0 400 300">${plate}<g ${G}><path d="M95 222 155 100 215 222Z"/><path d="M185 222 245 92 305 222Z"/><path d="M155 100v122M245 92v130" stroke-opacity=".45"/></g></svg>`,
     dessert: `<svg viewBox="0 0 400 300">${plate}<g ${G}><path d="M120 222c0-56 36-84 80-84s80 28 80 84"/><path d="M200 138v-20M188 112c4-10 20-10 24 0"/><circle cx="170" cy="180" r="4"/><circle cx="215" cy="168" r="4"/><circle cx="235" cy="195" r="4"/></g></svg>`
   };
-  const pic = p => p.image ? `<img src="${esc(p.image)}" alt="${esc(p.name)}" loading="lazy">` : (ART[p.art] || ART.roll);
+  // Real photo (with an optional "Serving suggestion" label) or the gold line icon
+  const pic = p => p.image
+    ? `<img src="${esc(p.image)}" alt="${esc(p.name)}" loading="lazy">${p.imageNote ? `<span class="pic-note">${esc(p.imageNote)}</span>` : ""}`
+    : (ART[p.art] || ART.roll);
   const product = id => C.products.find(p => p.id === id);
-  // a pack price can be one number, or a different price per type: { "Frozen (Fry at Home)": 1080, ... }
+  // a pack price can be one number, or a different price per type: { "Frozen": 1500, ... }
   const priceOf = (pk, type) => !pk ? 0 : (typeof pk.price === "object" ? (pk.price[type] || 0) : (pk.price || 0));
   const minPrice = p => Math.min(...p.packs.flatMap(pk => p.types.map(t => priceOf(pk, t))).filter(n => n > 0).concat([Infinity]));
 
   /* ---------- cart (saved in this browser) ---------- */
   const KEY = "kbk_cart_v1";
   let mem = [];
-  const fresh = items => items.filter(i => product(i.id)).map(i => { const p = product(i.id); return { ...i, price: priceOf(p.packs.find(k => k.name === i.pack), i.type) }; });
+  // keeps only items that can still be ordered (removes old carts with Fresh/Fried or Coming Soon items)
+  const orderable = i => { const p = product(i.id); return p && p.status === "available" && p.types.includes(i.type) && p.packs.some(k => k.name === i.pack); };
+  const fresh = items => items.filter(orderable).map(i => { const p = product(i.id); return { ...i, name: p.name, price: priceOf(p.packs.find(k => k.name === i.pack), i.type) }; });
   const load = () => { let items; try { items = JSON.parse(localStorage.getItem(KEY)) || []; } catch (e) { items = mem; } return fresh(items); };
   const save = items => { mem = items; try { localStorage.setItem(KEY, JSON.stringify(items)); } catch (e) {} updateCount(true); };
   const Cart = {
     items: load,
     add(id, pack, type, qty) {
-      const p = product(id); const pk = p.packs[pack];
+      const p = product(id); if (!p || p.status !== "available") return;
+      const pk = p.packs[pack];
       const key = `${id}|${pk.name}|${type}`;
       const items = load(); const ex = items.find(i => i.key === key);
       if (ex) ex.qty = Math.min(ex.qty + qty, 50);
@@ -72,7 +78,7 @@
   const NAV = [["index.html", "Home", "home"], ["shop.html", "Shop", "shop"], ["about.html", "About", "about"], ["contact.html", "Contact", "contact"]];
   const top = $("#site-header");
   if (top) top.outerHTML = `
-    <div class="prelaunch">✨ Launching soon in Lahore. <a class="wa-link" href="#">${esc(C.launchOffer)}</a></div>
+    ${PRE ? `<div class="prelaunch">✨ Launching soon in Lahore. <a class="wa-link" href="#">${esc(C.launchOffer)}</a></div>` : ""}
     <nav><div class="wrap">
       <a href="index.html" class="logo"><b>KITCHEN</b><i>by Kian</i></a>
       <div class="links" id="navLinks">${NAV.map(([h, t, k]) => `<a href="${h}" class="${k === page ? "active" : ""}">${t}</a>`).join("")}</div>
@@ -129,7 +135,8 @@
 
   function itemRow(i, small) {
     const p = product(i.id) || {};
-    return `<div class="citem"><div class="th">${pic(p)}</div>
+    const thumb = p.image ? `<img src="${esc(p.image)}" alt="" loading="lazy">` : (ART[p.art] || ART.roll);
+    return `<div class="citem"><div class="th">${thumb}</div>
       <div><b>${esc(i.name)}</b><small>${esc(i.pack)} · ${esc(i.type)}</small>
         ${small ? `<small>Qty ${i.qty}</small>` : `<div class="step" style="margin-top:6px"><button data-k="${esc(i.key)}" data-d="-1">−</button><span>${i.qty}</span><button data-k="${esc(i.key)}" data-d="1">+</button></div>
         <button class="rm" data-rm="${esc(i.key)}">Remove</button>`}</div>
@@ -217,7 +224,7 @@
       $("#coNote").textContent = PRE
         ? `No payment now. We'll confirm your reservation, price and ${pk ? "pickup time" : "delivery"} on WhatsApp before launch day.`
         : (pk ? "Your order opens in WhatsApp, ready to send. We'll confirm the total, pickup time and address with you before preparing it."
-              : "Your order opens in WhatsApp, ready to send. We'll confirm the total and delivery time with you before preparing it.");
+              : "Your order opens in WhatsApp, ready to send. We'll confirm the total, delivery charge and delivery time with you before preparing it.");
     }
     function applyMethod() {
       const pk = isPickup();
@@ -256,12 +263,13 @@
       });
       if (!ok) { $(".field.bad input,.field.bad select", form)?.focus(); return; }
       const d = Object.fromEntries(new FormData(form)); const t = totals(pk); const items = Cart.items();
+      if (!items.length) return;
       const msg = [
         PRE ? "Assalam o Alaikum! I'd like to RESERVE an order for Kitchen by Kian's launch day:" : "Assalam o Alaikum! New order from kitchenbykian.com:",
         "",
         pk ? `*PICKUP* (I'll collect from ${PK.area})` : "*DELIVERY*",
         "",
-        ...items.map(i => `• ${i.qty} × ${i.name}${(product(i.id)||{}).subtitle ? " – " + product(i.id).subtitle : ""} (${i.pack}, ${i.type})${i.price ? " = " + money(i.price * i.qty) : ""}`),
+        ...items.map(i => `• ${i.qty} × ${i.name}${(product(i.id)||{}).subtitle ? " – " + product(i.id).subtitle : ""} (${i.pack})${i.price ? " = " + money(i.price * i.qty) : ""}`),
         "",
         t.priced ? `Subtotal: ${money(t.sub)}` : null,
         t.priced ? (pk ? "Pickup: Free" : `Delivery: ${t.free ? "Free" : (C.delivery.fee ? money(C.delivery.fee) : "to confirm")}`) : null,
@@ -302,8 +310,9 @@
   if (stage) {
     stage.dataset.hero = QS.get("hero") || C.heroStyle;
     const box = $("#heroMedia");
-    if (C.heroVideo) { box.insertAdjacentHTML("afterbegin", `<video src="${esc(C.heroVideo)}" ${C.heroImage ? `poster="${esc(C.heroImage)}"` : ""} autoplay muted loop playsinline></video>`); stage.classList.add("has-media"); }
-    else if (C.heroImage) { box.insertAdjacentHTML("afterbegin", `<img src="${esc(C.heroImage)}" alt="Kitchen by Kian Cheese Chaska Roll">`); stage.classList.add("has-media"); }
+    const cap = C.heroCaption ? `<span class="pic-note">${esc(C.heroCaption)}</span>` : "";
+    if (C.heroVideo) { box.insertAdjacentHTML("afterbegin", `<video src="${esc(C.heroVideo)}" ${C.heroImage ? `poster="${esc(C.heroImage)}"` : ""} autoplay muted loop playsinline></video>${cap}`); stage.classList.add("has-media"); }
+    else if (C.heroImage) { box.insertAdjacentHTML("afterbegin", `<img src="${esc(C.heroImage)}" alt="Kitchen by Kian Frozen Cheese Chaska Roll">${cap}`); stage.classList.add("has-media"); }
     if (PRE) { $$(".cta-long").forEach(e => e.textContent = "Join the Launch List"); }
   }
   $$("[data-fill]").forEach(el => {

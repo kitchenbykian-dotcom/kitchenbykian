@@ -1,15 +1,16 @@
 /* =====================================================================
    KITCHEN BY KIAN: ALL YOUR BUSINESS DETAILS LIVE IN THIS ONE FILE
    Change anything here and every page of the website updates.
+   Last update: 7 Oct 2026 (frozen-only, final prices, live ordering)
    ===================================================================== */
 window.CONFIG = {
   whatsapp: "923304067230",      // Your WhatsApp number: country code 92, no + or 0 (e.g. 923001234567)
   email: "",                     // optional, e.g. "hello@kitchenbykian.com"
 
   // "prelaunch" = Launching Soon mode (orders become launch-day reservations)
-  // "live"      = normal ordering
-  launchMode: "prelaunch",
-  launchOffer: "Join the launch list and get an exclusive opening-day discount",
+  // "live"      = normal ordering (no launch banner, no launch date)
+  launchMode: "live",
+  launchOffer: "",
 
   // Hero picture until you add a real video/photo: "roll", "emblem", "cloche" or "orbit"
   heroStyle: "roll",
@@ -17,35 +18,48 @@ window.CONFIG = {
   style: "3d",
   // Colour theme: "noir" (black & gold), "maroon", "emerald" or "cream"
   theme: "noir",
-  // Real hero media (put the file next to index.html): video shown first, then photo
+  // Real hero media (put the file in the "photos" folder): video shown first, then photo
   heroVideo: "",
-  heroImage: "",
+  heroImage: "",                 // e.g. "photos/hero.jpg"
+  // Shown on the hero photo. Use it whenever the hero shows cooked rolls.
+  heroCaption: "Serving suggestion — delivered frozen",
 
   /* ---------------- PRODUCTS ----------------
-     status: "available" or "soon"
-     price: number in Rs (0 = "Price at launch"), or a price per type like { "Frozen (Fry at Home)": 1080, "Fresh (Ready to Eat)": 1200 }
-     image: photo file next to index.html (e.g. "rolls.jpg"), or "" for the gold icon
+     status: "available" or "soon" ("soon" = shown as Coming Soon, cannot be ordered)
+     price: number in Rs (0 = "Ask on WhatsApp"), or a price per type
+     image: real photo file (e.g. "photos/frozen-pack-6.jpg"), or "" for the gold icon
+     imageNote: small label on the photo. Use "Serving suggestion — delivered frozen"
+                whenever the photo shows cooked rolls; leave "" for photos of frozen packs.
   */
   products: [
     {
       id: "chicken-cheese-roll",
-      name: "Cheese Chaska Roll",
-      subtitle: "Chicken & Cheese",
-      desc: "Our signature: tender spiced chicken and a generous melted-cheese centre, hand-wrapped and fried golden-crisp. One bite and you're hooked.",
+      name: "Frozen Cheese Chaska Roll",
+      subtitle: "Chicken & Cheese · Ready to Cook",
+      desc: "Our signature: tender spiced chicken and a generous melted-cheese centre, hand-wrapped at home and delivered frozen. Cook straight from the freezer whenever you like.",
       status: "available",
       badge: "Signature",
-      art: "roll", image: "",
-      // Different price for each type (Fresh costs more: fried at home with oil and gas)
+      art: "roll", image: "", imageNote: "",
       packs: [
-        { name: "Pack of 6",  price: { "Frozen (Fry at Home)": 1080, "Fresh (Ready to Eat)": 1200 } },
-        { name: "Pack of 12", price: { "Frozen (Fry at Home)": 2100, "Fresh (Ready to Eat)": 2350 } }
+        { name: "Pack of 6",  price: 1500 },
+        { name: "Pack of 12", price: 3000 }
       ],
-      types: [ "Frozen (Fry at Home)", "Fresh (Ready to Eat)" ]
+      types: [ "Frozen (Ready to Cook)" ]
+    },
+    {
+      id: "fried-cheese-roll",
+      name: "Fried Cheese Chaska Roll",
+      subtitle: "Ready to Eat",
+      desc: "Fried golden and ready to eat. Coming soon. For now, order our frozen rolls and cook them fresh at home.",
+      status: "soon",
+      art: "roll", image: "", imageNote: "",
+      packs: [ { name: "Pack of 6", price: 0 }, { name: "Pack of 12", price: 0 } ],
+      types: [ "Fried (Ready to Eat)" ]
     },
     { id: "shami-kabab", name: "Shami Kababs", desc: "Soft, spiced homemade kababs, ready to fry.", status: "soon", art: "kabab", image: "",
-      packs: [ { name: "Pack of 6", price: 0 }, { name: "Pack of 12", price: 0 } ], types: [ "Frozen (Fry at Home)" ] },
+      packs: [ { name: "Pack of 6", price: 0 }, { name: "Pack of 12", price: 0 } ], types: [ "Frozen" ] },
     { id: "chicken-samosa", name: "Chicken Samosas", desc: "Crispy, hand-folded samosas with a spiced chicken filling.", status: "soon", art: "samosa", image: "",
-      packs: [ { name: "Pack of 12", price: 0 }, { name: "Pack of 24", price: 0 } ], types: [ "Frozen (Fry at Home)" ] },
+      packs: [ { name: "Pack of 12", price: 0 }, { name: "Pack of 24", price: 0 } ], types: [ "Frozen" ] },
     { id: "halwa", name: "Homemade Halwa", desc: "Rich, slow-cooked halwa made the traditional way.", status: "soon", art: "dessert", image: "",
       packs: [ { name: "Half kg", price: 0 }, { name: "1 kg", price: 0 } ], types: [ "Fresh" ] },
     { id: "desserts", name: "Homemade Desserts", desc: "Traditional sweet treats, made the homemade way.", status: "soon", art: "dessert", image: "",
