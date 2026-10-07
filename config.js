@@ -34,8 +34,8 @@ window.CONFIG = {
   products: [
     {
       id: "chicken-cheese-roll",
-      name: "Frozen Cheese Chaska Roll",
-      subtitle: "Chicken & Cheese · Ready to Cook",
+      name: "Cheese Chaska Roll",
+      subtitle: "Frozen · Chicken & Cheese · Ready to Cook",
       desc: "Our signature: tender spiced chicken and a generous melted-cheese centre, hand-wrapped at home and delivered frozen. Cook straight from the freezer whenever you like.",
       status: "available",
       badge: "Signature",

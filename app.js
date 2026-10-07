@@ -18,7 +18,7 @@
   const wa = msg => `https://wa.me/${C.whatsapp}?text=${encodeURIComponent(msg)}`;
   const general = PRE
     ? "Assalam o Alaikum! Please add me to the Kitchen by Kian launch list. I'd like the opening-day offer."
-    : "Assalam o Alaikum! I'd like to order Frozen Cheese Chaska Rolls from Kitchen by Kian.";
+    : "Assalam o Alaikum! I'd like to order Cheese Chaska Rolls from Kitchen by Kian.";
   const WA_ICON = '<svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2Zm4.5 12.1c-.2-.1-1.5-.7-1.7-.8s-.4-.1-.6.1-.7.8-.8 1-.3.2-.5.1a6.7 6.7 0 0 1-3.3-2.9c-.3-.4.3-.4.7-1.4.1-.2 0-.3 0-.4l-.8-1.8c-.2-.5-.4-.4-.6-.4h-.5a1 1 0 0 0-.7.3 3 3 0 0 0-.9 2.2 5.2 5.2 0 0 0 1.1 2.7 11.8 11.8 0 0 0 4.5 4c1.7.7 2.4.8 3.2.6a2.8 2.8 0 0 0 1.8-1.3 2.3 2.3 0 0 0 .2-1.3c-.1-.1-.3-.2-.5-.3Z"/></svg>';
 
   /* ---------- product icons (replaced automatically when you add photos) ---------- */
@@ -312,7 +312,7 @@
     const box = $("#heroMedia");
     const cap = C.heroCaption ? `<span class="pic-note">${esc(C.heroCaption)}</span>` : "";
     if (C.heroVideo) { box.insertAdjacentHTML("afterbegin", `<video src="${esc(C.heroVideo)}" ${C.heroImage ? `poster="${esc(C.heroImage)}"` : ""} autoplay muted loop playsinline></video>${cap}`); stage.classList.add("has-media"); }
-    else if (C.heroImage) { box.insertAdjacentHTML("afterbegin", `<img src="${esc(C.heroImage)}" alt="Kitchen by Kian Frozen Cheese Chaska Roll">${cap}`); stage.classList.add("has-media"); }
+    else if (C.heroImage) { box.insertAdjacentHTML("afterbegin", `<img src="${esc(C.heroImage)}" alt="Kitchen by Kian Cheese Chaska Roll">${cap}`); stage.classList.add("has-media"); }
     if (PRE) { $$(".cta-long").forEach(e => e.textContent = "Join the Launch List"); }
   }
   $$("[data-fill]").forEach(el => {
