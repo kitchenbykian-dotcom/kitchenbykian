@@ -135,7 +135,9 @@
 
   function itemRow(i, small) {
     const p = product(i.id) || {};
-    const thumb = p.image ? `<img src="${esc(p.image)}" alt="" loading="lazy">` : (ART[p.art] || ART.roll);
+    const pk = (p.packs || []).find(k => k.name === i.pack) || {};
+    const timg = pk.image || p.image;
+    const thumb = timg ? `<img src="${esc(timg)}" alt="" loading="lazy">` : (ART[p.art] || ART.roll);
     return `<div class="citem"><div class="th">${thumb}</div>
       <div><b>${esc(i.name)}</b><small>${esc(i.pack)} · ${esc(i.type)}</small>
         ${small ? `<small>Qty ${i.qty}</small>` : `<div class="step" style="margin-top:6px"><button data-k="${esc(i.key)}" data-d="-1">−</button><span>${i.qty}</span><button data-k="${esc(i.key)}" data-d="1">+</button></div>
@@ -176,8 +178,10 @@
       if (soon) return `<div class="pcard soon tilt reveal d${n % 3}"><div class="shine"></div><span class="badge">${badge}</span>
         <div class="pic">${pic(p)}</div><div class="pbody"><h3>${esc(p.name)}</h3>${p.subtitle ? `<div class="sub2">${esc(p.subtitle)}</div>` : ""}<p class="d">${esc(p.desc)}</p>
         <div class="buy"><span class="pr"></span><a class="notify" target="_blank" rel="noopener" href="${wa(`Assalam o Alaikum! Please notify me when ${p.name} launches at Kitchen by Kian.`)}">Notify me</a></div></div></div>`;
+      const packImgs = p.packs.some(k => k.image);
+      const picHtml = packImgs ? p.packs.map((k, i) => `<img class="pack-img${i ? "" : " on"}" data-pack="${i}" src="${esc(k.image || p.image)}" alt="${esc(p.name)}, ${esc(k.name)}" ${i ? 'loading="lazy"' : ""}>`).join("") : pic(p);
       return `<div class="pcard tilt reveal d${n % 3}" data-id="${p.id}"><div class="shine"></div><span class="badge">${badge}</span>
-        <div class="pic">${pic(p)}</div><div class="pbody"><h3>${esc(p.name)}</h3>${p.subtitle ? `<div class="sub2">${esc(p.subtitle)}</div>` : ""}<p class="d">${esc(p.desc)}</p>
+        <div class="pic${packImgs ? " has-pack" : ""}">${picHtml}</div><div class="pbody"><h3>${esc(p.name)}</h3>${p.subtitle ? `<div class="sub2">${esc(p.subtitle)}</div>` : ""}<p class="d">${esc(p.desc)}</p>
         <div class="lbl">Pack size</div><div class="seg" data-g="pack">${p.packs.map((k, i) => `<button type="button" data-v="${i}" class="${i ? "" : "on"}">${esc(k.name)}</button>`).join("")}</div>
         ${p.types.length > 1 ? `<div class="lbl">Type</div><div class="seg" data-g="type">${p.types.map((k, i) => `<button type="button" data-v="${i}" class="${i ? "" : "on"}">${esc(k)}</button>`).join("")}</div>` : ""}
         <div class="buy"><span class="pr">${rs(priceOf(p.packs[0], p.types[0]))}</span>
@@ -190,7 +194,7 @@
       card.querySelectorAll(".seg").forEach(seg => seg.onclick = e => {
         const b = e.target.closest("button"); if (!b) return;
         seg.querySelectorAll("button").forEach(x => x.classList.toggle("on", x === b));
-        if (seg.dataset.g === "pack") pack = +b.dataset.v; else type = +b.dataset.v; upd();
+        if (seg.dataset.g === "pack") { pack = +b.dataset.v; card.querySelectorAll(".pack-img").forEach(im => im.classList.toggle("on", +im.dataset.pack === pack)); } else type = +b.dataset.v; upd();
       });
       card.querySelectorAll("[data-q]").forEach(b => b.onclick = () => { qty = Math.max(1, Math.min(50, qty + +b.dataset.q)); upd(); });
       card.querySelector(".add").onclick = () => { Cart.add(p.id, pack, p.types[type], qty); toast(`✓ ${p.name} (${p.packs[pack].name}) added to cart`); qty = 1; upd(); };
@@ -312,6 +316,9 @@
     const box = $("#heroMedia");
     const cap = C.heroCaption ? `<span class="pic-note">${esc(C.heroCaption)}</span>` : "";
     if (C.heroVideo) { box.insertAdjacentHTML("afterbegin", `<video src="${esc(C.heroVideo)}" ${C.heroImage ? `poster="${esc(C.heroImage)}"` : ""} autoplay muted loop playsinline></video>${cap}`); stage.classList.add("has-media"); }
+    else if (C.heroLayers && C.heroLayers.bg) { const L = C.heroLayers;
+      box.insertAdjacentHTML("afterbegin", `<div class="h3d"><img class="h3d-bg" src="${esc(L.bg)}" alt="" fetchpriority="high"><img class="h3d-fg" src="${esc(L.fg)}" alt="${esc(L.alt || "Kitchen by Kian Cheese Chaska Roll")}" style="left:${L.left}%;top:${L.top}%;width:${L.width}%"><i class="h3d-glint"></i></div>${cap}`);
+      stage.classList.add("has-media", "has-3d"); }
     else if (C.heroImage) { box.insertAdjacentHTML("afterbegin", `<img src="${esc(C.heroImage)}" alt="Kitchen by Kian Cheese Chaska Roll">${cap}`); stage.classList.add("has-media"); }
     if (PRE) { $$(".cta-long").forEach(e => e.textContent = "Join the Launch List"); }
   }

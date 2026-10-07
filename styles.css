@@ -408,3 +408,101 @@ body.simple .float{animation:none}
 /* keep grids balanced with the extra "Fried — Coming Soon" card */
 @media(min-width:1101px){.menu:has(> :nth-child(6)){grid-template-columns:repeat(3,1fr)}}
 @media(min-width:1001px){.shop-grid.four:has(> :nth-child(5)){grid-template-columns:repeat(3,1fr)}}
+
+/* =================== SCROLL STORY (home page, 8 Oct 2026) =================== */
+.ss-scene{position:relative;padding:0;overflow:visible}
+.ss-s1{height:280vh}.ss-s2{height:240vh}.ss-s3{height:280vh}
+.ss-sticky{position:sticky;top:0;height:100vh;height:100svh;overflow:hidden;display:grid;place-items:center;padding-top:68px}
+.ss-s1 .ss-sticky{background:radial-gradient(ellipse at 65% 55%,#2a1f15 0%,var(--bg) 62%)}
+.ss-s2 .ss-sticky{background:radial-gradient(ellipse at 60% 50%,#241b13 0%,#110e0c 65%);border-top:1px solid var(--line)}
+.ss-s3 .ss-sticky{background:radial-gradient(ellipse at 35% 55%,#2a2016 0%,var(--bg) 62%);border-top:1px solid var(--line)}
+.ss-tag{position:absolute;left:50%;bottom:14px;transform:translateX(-50%);background:rgba(20,17,16,.82);border:1px solid var(--gold);border-radius:999px;padding:.25rem .75rem;font-size:.7rem;white-space:nowrap;color:var(--cream);z-index:2;pointer-events:none}
+.ss-tag-top{bottom:auto;top:6px}
+/* scene 1 */
+.ss-wrap1{width:min(1100px,100%);display:grid;grid-template-columns:1fr auto;gap:48px;align-items:center;padding:0 20px}
+.ss-heads{position:relative;min-height:9rem;margin-top:.6rem}
+.ss-heads h2{position:absolute;left:0;right:0;top:0;font-size:clamp(1.9rem,4.6vw,3.2rem);opacity:0;transform:translateY(20px);transition:opacity .45s,transform .45s;margin:0}
+.ss-heads h2.on{opacity:1;transform:none}
+.ss-heads h2 em,.ss-copy h2 em{font-style:normal;color:var(--gold)}
+.ss-hint{color:var(--muted);font-size:.78rem;letter-spacing:.2em;text-transform:uppercase;margin-top:1rem}
+.ss-vframe{position:relative;height:min(74vh,720px);aspect-ratio:9/16;border-radius:26px;overflow:hidden;border:1px solid var(--gold);box-shadow:0 40px 80px rgba(0,0,0,.55),0 0 0 10px rgba(201,162,74,.08);background:#000}
+.ss-vframe canvas,.ss-vframe img{width:100%;height:100%;display:block;object-fit:cover}
+/* scene 2 */
+.ss-wrap2{width:min(1160px,100%);display:grid;grid-template-columns:1fr 1.4fr;gap:20px;align-items:center;padding:0 20px}
+.ss-stage{position:relative;width:100%;aspect-ratio:3/2}
+.ss-stage svg{position:absolute;inset:0;width:100%;height:100%;overflow:visible}
+.ss-t{margin:.4rem 0 1.4rem}
+.ss-layers{list-style:none;display:grid;gap:14px}
+.ss-layers li{border-left:2px solid var(--line);padding:.35rem 0 .35rem 1rem;opacity:.25;transform:translateX(-10px);transition:.45s}
+.ss-layers li.on{opacity:1;transform:none;border-color:var(--gold)}
+.ss-layers b{display:block;font-family:"Playfair Display",serif;font-size:1.2rem;font-weight:600}
+.ss-layers span{color:var(--muted);font-size:.9rem}
+/* scene 3 */
+.ss-wrap3{width:min(1160px,100%);display:grid;grid-template-columns:1.25fr 1fr;gap:36px;align-items:center;padding:0 20px}
+.ss-photos{position:relative;aspect-ratio:4/3;border-radius:24px;overflow:hidden;border:1px solid var(--gold);box-shadow:0 40px 80px rgba(0,0,0,.5);background:var(--card)}
+.ss-photos img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:0;transform:scale(1.08);transition:opacity .6s ease,transform 1.6s ease}
+.ss-photos img.on{opacity:1;transform:scale(1)}
+.ss-copy{position:relative;min-height:360px}
+.ss-step{position:absolute;inset:0 0 auto 0;opacity:0;transform:translateY(16px);transition:.45s;pointer-events:none}
+.ss-step.on{opacity:1;transform:none;pointer-events:auto}
+.ss-step h2{margin:.4rem 0 .8rem}
+.ss-step p{color:var(--muted)}
+.ss-packs{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin:1rem 0 1.2rem}
+.ss-pk{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:.9rem 1rem}
+.ss-pk .n{font-family:"Playfair Display",serif;font-size:1.12rem}
+.ss-pk .p{color:var(--gold);font-weight:600}
+.ss-ctas{display:flex;gap:.7rem;flex-wrap:wrap}
+.ss-follow{display:flex;align-items:center;gap:14px;margin-top:1.2rem;color:var(--muted);font-size:.8rem;letter-spacing:.18em;text-transform:uppercase}
+.ss-follow .social a{width:38px;height:38px}
+@media(max-width:860px){
+  .ss-sticky{padding-top:76px}
+  .ss-wrap1{grid-template-columns:1fr;gap:8px;justify-items:center;text-align:center}
+  .ss-lines{width:100%}
+  .ss-wrap1 .eyebrow,.ss-hint{display:none}
+  .ss-heads{min-height:4.6rem;width:100%;margin:0}
+  .ss-heads h2{font-size:1.55rem}
+  .ss-vframe{height:64vh;height:64svh}
+  .ss-wrap2{grid-template-columns:1fr;gap:6px}
+  .ss-wrap2 .ss-side{order:2}
+  .ss-wrap2 .eyebrow,.ss-t{display:none}
+  .ss-layers{grid-template-columns:1fr 1fr;gap:8px}
+  .ss-layers b{font-size:.98rem}.ss-layers span{font-size:.76rem}
+  .ss-wrap3{grid-template-columns:1fr;gap:14px;text-align:center}
+  .ss-photos{width:min(100%,520px);justify-self:center}
+  .ss-copy{min-height:330px}
+  .ss-step h2{font-size:1.5rem;margin:.2rem 0 .5rem}
+  .ss-step p{font-size:.92rem}
+  .ss-ctas,.ss-follow{justify-content:center}
+  .ss-ctas .btn{padding:.75rem 1.2rem;font-size:.92rem}
+}
+/* still mode (reduced motion or "simple" style): show everything without scrolling effects */
+.ss-still .ss-s1,.ss-still .ss-s2,.ss-still .ss-s3{height:auto}
+.ss-still .ss-sticky{position:relative;height:auto;min-height:0;padding:60px 0}
+.ss-still .ss-heads h2,.ss-still .ss-step{position:relative;opacity:1;transform:none;display:none}
+.ss-still .ss-heads h2:last-child,.ss-still .ss-step:last-child{display:block}
+.ss-still .ss-photos img:last-of-type{opacity:1;transform:none}
+/* real product photos: keep the rolls in view in 4:3 cards */
+.pcard .pic img,.item .pic img,.citem .th img{object-position:50% 50%}
+
+/* =================== 3D HERO (layered photo, 8 Oct 2026) =================== */
+.stage.has-3d .media{display:block;background:#0e0d0c}
+.h3d{position:absolute;inset:0;overflow:hidden;--mx:0;--my:0;--sy:0}
+.h3d img{position:absolute;display:block;will-change:transform}
+.h3d-bg{inset:-4%;width:108%;height:108%;object-fit:cover;transform:translate3d(calc(var(--mx)*-10px),calc(var(--my)*-10px + var(--sy)*-20px),0) scale(1.02);transition:transform .25s ease-out}
+.h3d-fg{height:auto;filter:drop-shadow(10px 22px 18px rgba(0,0,0,.75)) drop-shadow(0 0 1px rgba(255,214,140,.25));
+  transform:translate3d(calc(var(--mx)*18px),calc(var(--my)*14px + var(--sy)*30px),0) rotateX(calc(var(--my)*-6deg)) rotateY(calc(var(--mx)*8deg));
+  transition:transform .25s ease-out;animation:h3dfloat 6s ease-in-out infinite}
+@keyframes h3dfloat{0%,100%{translate:0 0}50%{translate:0 -10px}}
+.h3d-glint{position:absolute;inset:0;pointer-events:none;background:linear-gradient(115deg,transparent 35%,rgba(255,228,170,.16) 48%,transparent 60%);transform:translateX(-120%);animation:h3dglint 7s ease-in-out infinite 1.5s}
+@keyframes h3dglint{0%,70%{transform:translateX(-120%)}100%{transform:translateX(120%)}}
+.h3d{perspective:900px}
+body.simple .h3d-fg,body.simple .h3d-glint{animation:none}
+@media (prefers-reduced-motion: reduce){.h3d-fg,.h3d-glint{animation:none}.h3d img{transition:none}}
+.media .h3d img.h3d-fg{height:auto;object-fit:contain}
+.media .h3d img.h3d-bg{width:108%;height:108%}
+
+/* ---- Shop card: one photo per pack (8 Oct 2026) ---- */
+.pcard .pic.has-pack{position:relative;aspect-ratio:1/1!important;background:#141110}
+.pcard .pic.has-pack .pack-img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:50% 50%;opacity:0;transition:opacity .45s ease}
+.pcard .pic.has-pack .pack-img.on{opacity:1}
+.citem .th img{object-position:50% 40%}
