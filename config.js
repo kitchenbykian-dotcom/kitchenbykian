@@ -39,7 +39,7 @@ window.CONFIG = {
       desc: "Our signature: tender spiced chicken and a generous melted-cheese centre, hand-wrapped at home and delivered frozen. Cook straight from the freezer whenever you like.",
       status: "available",
       badge: "Signature",
-      art: "roll", image: "", imageNote: "",
+      art: "roll", image: "photos/menu-cheese-chaska-roll.jpg", imageNote: "",
       packs: [
         // image: photo shown on the Shop card when this pack is selected
         { name: "Pack of 6",  price: 1500, image: "photos/pack-6.jpg" },
@@ -53,7 +53,7 @@ window.CONFIG = {
       subtitle: "Ready to Eat",
       desc: "Fried golden and ready to eat. Coming soon. For now, order our frozen rolls and cook them fresh at home.",
       status: "soon",
-      art: "roll", image: "", imageNote: "",
+      art: "roll", image: "photos/menu-fried-cheese-chaska-roll.jpg", imageNote: "",
       packs: [ { name: "Pack of 6", price: 0 }, { name: "Pack of 12", price: 0 } ],
       types: [ "Fried (Ready to Eat)" ]
     },
