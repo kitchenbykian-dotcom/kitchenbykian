@@ -19,10 +19,10 @@ window.CONFIG = {
   // Colour theme: "noir" (black & gold), "maroon", "emerald" or "cream"
   theme: "noir",
   // Real hero media (put the file in the "photos" folder): video shown first, then photo
-  heroVideo: "",
-  heroImage: "",                 // e.g. "photos/hero.jpg"
+  heroVideo: "photos/hero-loop.mp4",
+  heroImage: "photos/hero-loop-poster.jpg",                 // e.g. "photos/hero.jpg"
   // Shown on the hero photo. Use it whenever the hero shows cooked rolls.
-  heroCaption: "Serving suggestion — delivered frozen",
+  heroCaption: "",
 
   /* ---------------- PRODUCTS ----------------
      status: "available" or "soon" ("soon" = shown as Coming Soon, cannot be ordered)
