@@ -42,9 +42,9 @@ window.CONFIG = {
       art: "roll", image: "photos/menu-cheese-chaska-roll.jpg", imageNote: "",
       packs: [
         // Prices changed 9 Oct 2026. image: photo shown on the Shop card when this pack is selected
-        // (add "photos/pack-5.jpg" / "photos/pack-10.jpg" when the new photos are ready)
-        { name: "Pack of 5",  price: 800,  image: "photos/shop-cheese-chaska-roll.jpg" },
-        { name: "Pack of 10", price: 1500, image: "photos/shop-cheese-chaska-roll.jpg" }
+        // pack-5.jpg / pack-10.jpg = Kian's 5-roll and 10-roll photos (9 Oct)
+        { name: "Pack of 5",  price: 800,  image: "photos/pack-5.jpg" },
+        { name: "Pack of 10", price: 1500, image: "photos/pack-10.jpg" }
       ],
       types: [ "Frozen (Ready to Cook)" ]
     },
