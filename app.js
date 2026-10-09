@@ -75,12 +75,12 @@
   }
 
   /* ---------- header / banner / footer / drawer ---------- */
-  const NAV = [["index.html", "Home", "home"], ["shop.html", "Shop", "shop"], ["about.html", "About", "about"], ["contact.html", "Contact", "contact"]];
+  const NAV = [["/", "Home", "home"], ["shop.html", "Shop", "shop"], ["about.html", "About", "about"], ["contact.html", "Contact", "contact"]];
   const top = $("#site-header");
   if (top) top.outerHTML = `
     ${PRE ? `<div class="prelaunch">✨ Launching soon in Lahore. <a class="wa-link" href="#">${esc(C.launchOffer)}</a></div>` : ""}
     <nav><div class="wrap">
-      <a href="index.html" class="logo"><b>KITCHEN</b><i>by Kian</i></a>
+      <a href="/" class="logo"><b>KITCHEN</b><i>by Kian</i></a>
       <div class="links" id="navLinks">${NAV.map(([h, t, k]) => `<a href="${h}" class="${k === page ? "active" : ""}">${t}</a>`).join("")}</div>
       <div class="nav-right">
         <a class="btn sm" href="shop.html">${PRE ? "Reserve Now" : "Order Now"}</a>
@@ -96,7 +96,7 @@
   if (foot) foot.outerHTML = `
     <footer><div class="wrap">
       <div class="foot-cols">
-        <div><a href="index.html" class="logo"><b>KITCHEN</b><i>by Kian</i></a>
+        <div><a href="/" class="logo"><b>KITCHEN</b><i>by Kian</i></a>
           <p style="margin-top:.8rem;max-width:320px">Premium homemade food from our family kitchen in Lahore. Homemade, handcrafted, premium.</p>
 </div>
         <div><h5>Explore</h5>${NAV.map(([h, t]) => `<a href="${h}">${t}</a>`).join("")}<a href="checkout.html">Checkout</a></div>
@@ -290,7 +290,7 @@
         <h2>${PRE ? "Reservation Sent!" : "Order Sent!"}</h2>
         <p class="sub" style="margin:0 auto 1.4rem">Tap the button below to open WhatsApp, then press <b>Send</b>. We'll confirm everything with you shortly.</p>
         <a class="btn" href="${wa(msg)}" target="_blank" rel="noopener">${WA_ICON} Open WhatsApp &amp; Send</a>
-        <p class="note"><a href="index.html" style="color:var(--gold)">Back to Home</a></p></div>`;
+        <p class="note"><a href="/" style="color:var(--gold)">Back to Home</a></p></div>`;
       scrollTo({ top: 0, behavior: "smooth" });
     };
   };
