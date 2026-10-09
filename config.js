@@ -41,9 +41,10 @@ window.CONFIG = {
       badge: "Signature",
       art: "roll", image: "photos/menu-cheese-chaska-roll.jpg", imageNote: "",
       packs: [
-        // image: photo shown on the Shop card when this pack is selected
-        { name: "Pack of 6",  price: 1500, image: "photos/pack-6.jpg" },
-        { name: "Pack of 12", price: 3000, image: "photos/pack-12.jpg" }
+        // Prices changed 9 Oct 2026. image: photo shown on the Shop card when this pack is selected
+        // (add "photos/pack-5.jpg" / "photos/pack-10.jpg" when the new photos are ready)
+        { name: "Pack of 5",  price: 800,  image: "photos/shop-cheese-chaska-roll.jpg" },
+        { name: "Pack of 10", price: 1500, image: "photos/shop-cheese-chaska-roll.jpg" }
       ],
       types: [ "Frozen (Ready to Cook)" ]
     },
@@ -54,7 +55,7 @@ window.CONFIG = {
       desc: "Fried golden and ready to eat. Coming soon. For now, order our frozen rolls and cook them fresh at home.",
       status: "soon",
       art: "roll", image: "photos/menu-fried-cheese-chaska-roll.jpg", imageNote: "",
-      packs: [ { name: "Pack of 6", price: 0 }, { name: "Pack of 12", price: 0 } ],
+      packs: [ { name: "Pack of 5", price: 0 }, { name: "Pack of 10", price: 0 } ],
       types: [ "Fried (Ready to Eat)" ]
     },
     { id: "shami-kabab", name: "Shami Kababs", desc: "Soft, spiced homemade kababs, ready to fry.", status: "soon", art: "kabab", image: "",
