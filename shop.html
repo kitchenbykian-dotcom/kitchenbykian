@@ -19,7 +19,36 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600&family=Great+Vibes&family=Playfair+Display:wght@500;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="styles.css?v=20261009c">
+<link rel="stylesheet" href="styles.css?v=20261101a">
+<script type="application/ld+json">
+{
+ "@context": "https://schema.org",
+ "@type": "Product",
+ "name": "Cheese Chaska Roll — Frozen Chicken Cheese Roll",
+ "description": "Homemade chicken & cheese rolls from Kitchen by Kian, Lahore. Delivered frozen and ready to cook; deep-fry from frozen 5–7 minutes.",
+ "image": [
+  "https://kitchenbykian.com/photos/pack-5.jpg",
+  "https://kitchenbykian.com/photos/pack-10.jpg"
+ ],
+ "brand": {
+  "@type": "Brand",
+  "name": "Kitchen by Kian"
+ },
+ "offers": {
+  "@type": "AggregateOffer",
+  "priceCurrency": "PKR",
+  "lowPrice": "800",
+  "highPrice": "1500",
+  "offerCount": "2",
+  "availability": "https://schema.org/InStock",
+  "url": "https://kitchenbykian.com/shop.html",
+  "seller": {
+   "@type": "Organization",
+   "name": "Kitchen by Kian"
+  }
+ }
+}
+</script>
 </head>
 <body data-page="shop">
 <div id="site-header"></div>
@@ -33,7 +62,7 @@
 </header>
 <section style="padding-top:30px">
   <div class="wrap">
-    <div class="shop-grid" id="shopGrid"></div>
+    <div class="shop-grid" id="shopGrid"><p class="center sub">Cheese Chaska Roll (chicken &amp; cheese) — frozen, ready to cook. Pack of 5: Rs 800 · Pack of 10: Rs 1,500. Order online and we confirm on WhatsApp.</p></div>
     <div class="center reveal soon-title"><div class="eyebrow">Coming Soon</div><h2>More From Our Kitchen</h2><p class="sub">Tap "Notify me" and we'll message you on WhatsApp the day they launch.</p></div>
     <div class="shop-grid four" id="soonGrid"></div>
   </div>
@@ -42,16 +71,16 @@
   <div class="wrap">
     <div class="center reveal"><div class="eyebrow">Good to Know</div><h2>Delivery &amp; Payment</h2></div>
     <div class="info">
-      <div class="card tilt reveal"><div class="shine"></div><div class="lift"><b>Areas</b><div data-fill="areas"></div></div></div>
-      <div class="card tilt reveal d1"><div class="shine"></div><div class="lift"><b>Delivery Charges</b><div data-fill="fee"></div></div></div>
-      <div class="card tilt reveal d2"><div class="shine"></div><div class="lift"><b>Order Timing</b><div data-fill="timing"></div></div></div>
+      <div class="card tilt reveal"><div class="shine"></div><div class="lift"><b>Areas</b><div data-fill="areas">All over Lahore</div></div></div>
+      <div class="card tilt reveal d1"><div class="shine"></div><div class="lift"><b>Delivery Charges</b><div data-fill="fee">Confirmed on WhatsApp</div></div></div>
+      <div class="card tilt reveal d2"><div class="shine"></div><div class="lift"><b>Order Timing</b><div data-fill="timing">Order 1 day in advance</div></div></div>
     </div>
-    <p class="center sub reveal" style="margin-top:1.4rem">Payment: <span data-fill="payment"></span></p>
+    <p class="center sub reveal" style="margin-top:1.4rem">Payment: <span data-fill="payment">Cash on Delivery · JazzCash · Easypaisa · Bank Transfer</span></p>
   </div>
 </section>
 <div id="site-footer"></div>
-<script src="config.js?v=20261009c"></script>
-<script src="app.js?v=20261009c"></script>
+<script src="config.js?v=20261101a"></script>
+<script src="app.js?v=20261101a"></script>
 <script>renderProducts(document.getElementById('shopGrid'),{status:'available'}); renderProducts(document.getElementById('soonGrid'),{status:'soon'});</script>
 </body>
 </html>
