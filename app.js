@@ -99,7 +99,7 @@
         <div><a href="/" class="logo"><b>KITCHEN</b><i>by Kian</i></a>
           <p style="margin-top:.8rem;max-width:320px">Premium homemade food from our family kitchen in Lahore. Homemade, handcrafted, premium.</p>
 </div>
-        <div><h5>Explore</h5>${NAV.map(([h, t]) => `<a href="${h}">${t}</a>`).join("")}<a href="checkout.html">Checkout</a></div>
+        <div><h5>Explore</h5>${NAV.map(([h, t]) => `<a href="${h}">${t}</a>`).join("")}<a href="bulk-orders.html">Bulk Orders</a><a href="checkout.html">Checkout</a></div>
         <div><h5>Order</h5><a class="wa-link" href="#">WhatsApp</a><span style="display:block;padding:3px 0">${esc(C.delivery.areas)}</span><span style="display:block;padding:3px 0">${esc(C.delivery.timing)}</span>${C.email ? `<a href="mailto:${esc(C.email)}">${esc(C.email)}</a>` : ""}</div>
       </div>
       <div class="follow"><h5>Follow Us</h5>
