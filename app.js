@@ -32,7 +32,7 @@
   };
   // Real photo (with an optional "Serving suggestion" label) or the gold line icon
   const pic = p => p.image
-    ? `<img src="${esc(p.image)}" alt="${esc(p.name)}" loading="lazy">${p.imageNote ? `<span class="pic-note">${esc(p.imageNote)}</span>` : ""}`
+    ? `<img src="${esc(p.image)}" alt="${esc(p.name)}${p.subtitle ? ` (${esc(p.subtitle)})` : ""} by Kitchen by Kian, Lahore" loading="lazy">${p.imageNote ? `<span class="pic-note">${esc(p.imageNote)}</span>` : ""}`
     : (ART[p.art] || ART.roll);
   const product = id => C.products.find(p => p.id === id);
   // a pack price can be one number, or a different price per type: { "Frozen": 1500, ... }
@@ -179,7 +179,7 @@
         <div class="pic">${pic(p)}</div><div class="pbody"><h3>${esc(p.name)}</h3>${p.subtitle ? `<div class="sub2">${esc(p.subtitle)}</div>` : ""}<p class="d">${esc(p.desc)}</p>
         <div class="buy"><span class="pr"></span><a class="notify" target="_blank" rel="noopener" href="${wa(`Assalam o Alaikum! Please notify me when ${p.name} launches at Kitchen by Kian.`)}">Notify me</a></div></div></div>`;
       const packImgs = p.packs.some(k => k.image);
-      const picHtml = packImgs ? p.packs.map((k, i) => `<img class="pack-img${i ? "" : " on"}" data-pack="${i}" src="${esc(k.image || p.image)}" alt="${esc(p.name)}, ${esc(k.name)}" ${i ? 'loading="lazy"' : ""}>`).join("") : pic(p);
+      const picHtml = packImgs ? p.packs.map((k, i) => `<img class="pack-img${i ? "" : " on"}" data-pack="${i}" src="${esc(k.image || p.image)}" alt="${esc(p.name)}, ${esc(k.name)}: homemade frozen chicken cheese rolls by Kitchen by Kian, Lahore" ${i ? 'loading="lazy"' : ""}>`).join("") : pic(p);
       return `<div class="pcard tilt reveal d${n % 3}" data-id="${p.id}"><div class="shine"></div><span class="badge">${badge}</span>
         <div class="pic${packImgs ? " has-pack" : ""}">${picHtml}</div><div class="pbody"><h3>${esc(p.name)}</h3>${p.subtitle ? `<div class="sub2">${esc(p.subtitle)}</div>` : ""}<p class="d">${esc(p.desc)}</p>
         <div class="lbl">Pack size</div><div class="seg" data-g="pack">${p.packs.map((k, i) => `<button type="button" data-v="${i}" class="${i ? "" : "on"}">${esc(k.name)}</button>`).join("")}</div>
@@ -315,8 +315,8 @@
     stage.dataset.hero = QS.get("hero") || C.heroStyle;
     const box = $("#heroMedia");
     const cap = C.heroCaption ? `<span class="pic-note">${esc(C.heroCaption)}</span>` : "";
-    if (C.heroVideo) { box.insertAdjacentHTML("afterbegin", `<video src="${esc(C.heroVideo)}" ${C.heroImage ? `poster="${esc(C.heroImage)}"` : ""} autoplay muted loop playsinline></video>${cap}`); stage.classList.add("has-media"); }
-    else if (C.heroImage) { box.insertAdjacentHTML("afterbegin", `<img src="${esc(C.heroImage)}" alt="Kitchen by Kian Cheese Chaska Roll">${cap}`); stage.classList.add("has-media"); }
+    if (C.heroVideo) { box.insertAdjacentHTML("afterbegin", `<video src="${esc(C.heroVideo)}" ${C.heroImage ? `poster="${esc(C.heroImage)}"` : ""} autoplay muted loop playsinline aria-label="Kitchen by Kian Cheese Chaska Rolls, homemade frozen chicken cheese rolls in Lahore"></video>${cap}`); stage.classList.add("has-media"); }
+    else if (C.heroImage) { box.insertAdjacentHTML("afterbegin", `<img src="${esc(C.heroImage)}" alt="Kitchen by Kian Cheese Chaska Rolls, homemade frozen chicken cheese rolls in Lahore">${cap}`); stage.classList.add("has-media"); }
     if (PRE) { $$(".cta-long").forEach(e => e.textContent = "Join the Launch List"); }
   }
   $$("[data-fill]").forEach(el => {
